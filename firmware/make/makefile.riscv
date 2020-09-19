@@ -1,0 +1,53 @@
+ifeq ($(MAKE_DIR),)
+${error - MAKE_DIR not specified}
+endif
+
+SW_ROOT := $(abspath $(MAKE_DIR)/..)
+
+###############################################################################
+# RISC-V Flags
+###############################################################################
+# GCC_PREFIX     = arch-toolchain-
+GCC_PREFIX=riscv32-unknown-elf-
+# ARCH_CFLAGS
+ARCH_CFLAGS=
+# ARCH_LFLAGS
+ARCH_LFLAGS=
+# FPIC           = yes | no
+FPIC = no
+# SHARED_LIB     = yes | no
+SHARED_LIB = no
+# COMPILER       = g++ | gcc
+COMPILER = gcc
+
+ifeq (,$(shell which $(GCC_PREFIX)gcc))
+${error - RISC-V GCC tools not available on PATH}
+endif
+
+###############################################################################
+# Platform
+###############################################################################
+PLATFORM    ?= machine-fpga
+PLATFORM_DIR = $(SW_ROOT)/arch/riscv
+
+SRC_DIR     += $(wildcard $(SW_ROOT)/drivers/*)
+
+BASE_ADDRESS ?= 0x80000000
+MEM_SIZE     ?= 65535
+
+ARCH_CFLAGS += -DMACHINE_FPGA
+ARCH_LFLAGS += -nostartfiles -nodefaultlibs -lm
+
+ARCH_CFLAGS += -DCONFIG_USE_LOCAL_STRING_H
+ARCH_LFLAGS += -Wl,--defsym=BASE_ADDRESS=$(BASE_ADDRESS)
+ARCH_LFLAGS += -Wl,--defsym=MEM_SIZE=$(MEM_SIZE)
+
+EXTRA_SRC := $(PLATFORM_DIR)/boot.S $(EXTRA_SRC)
+
+LINKER_SCRIPT ?= linker_script.ld
+LINKER_SCRIPT_DIR ?= $(SW_ROOT)/arch/$(ARCH)/
+EXTRA_CFLAGS += -DLINK_TYPE_RAM
+
+ARCH_LFLAGS += -T$(LINKER_SCRIPT_DIR)/$(LINKER_SCRIPT)
+SRC_DIR     += $(PLATFORM_DIR)
+

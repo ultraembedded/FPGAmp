@@ -1,11 +1,6 @@
 #include "uart_lite.h"
 
-// Compatible with Xilinx AXI UART Lite IP
 #ifdef CONFIG_UARTLITE
-
-#ifndef CONFIG_UARTLITE_BASE
-#define CONFIG_UARTLITE_BASE 0x92000000
-#endif
 
 //-----------------------------------------------------------------
 // Defines
@@ -125,5 +120,4 @@ int console_getchar(int ch)
     return uartlite_getchar();
 }
 #endif
-
 #endif
