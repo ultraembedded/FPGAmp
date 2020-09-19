@@ -1,0 +1,12 @@
+[submodule "firmware/rtos"]
+	path = firmware/rtos
+	url = https://github.com/ultraembedded/librtos.git
+[submodule "firmware/fat"]
+	path = firmware/fat
+	url = https://github.com/ultraembedded/fat_io_lib.git
+[submodule "firmware/mp3"]
+	path = firmware/mp3
+	url = https://github.com/ultraembedded/libhelix-mp3.git
+[submodule "firmware/lvgl"]
+	path = firmware/lvgl
+	url = https://github.com/lvgl/lvgl.git
