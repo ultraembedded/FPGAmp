@@ -34,6 +34,7 @@ The FPGA gateware for this project is constructed from various sub-projects;
 * [SD/MMC interface](https://github.com/ultraembedded/core_mmc)
 * [JPEG decoder](https://github.com/ultraembedded/core_jpeg_decoder)
 * [Audio controller](https://github.com/ultraembedded/core_audio)
+* [DVI framebuffer](https://github.com/ultraembedded/core_dvi_framebuffer)
 
 On the firmware side, this project uses;
 * [RTOS](https://github.com/ultraembedded/librtos)
