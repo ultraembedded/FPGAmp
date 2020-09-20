@@ -25,6 +25,9 @@ git clone --recursive https://github.com/ultraembedded/FPGAmp.git
 
 ```
 
+## Block Diagram
+![Block Diagram](docs/block_diagram.png)
+
 ## Project Files
 
 The FPGA gateware for this project is constructed from various sub-projects;
