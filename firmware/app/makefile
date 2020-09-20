@@ -36,6 +36,12 @@ EXTRA_CFLAGS += -DMCU_CLK=50000000
 SRC_DIR += ../fs/fatfs/src
 EXTRA_CFLAGS+= -DFATFS_INC_TEST_HOOKS
 
+# MP3 Codec
+EXTRA_CFLAGS+= -DINCLUDE_MP3_SUPPORT
+SRC_DIR     += ../mp3/real
+SRC_DIR     += ../mp3/pub
+SRC_DIR     += ../mp3
+
 # LIB: printf, etc
 SRC_DIR     += ../lib
 EXTRA_CFLAGS+= -DCONFIG_MALLOC
@@ -50,6 +56,7 @@ include $(LVGL_DIR)/lvgl/lvgl.mk
 EXTRA_SRC:= $(sort $(ASRCS) $(CSRCS) $(MAINSRC))
 
 MEM_SIZE=0x3000000
+OPT = 2
 
 TARGET=boot
 ARCH=riscv

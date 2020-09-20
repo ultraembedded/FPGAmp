@@ -77,7 +77,7 @@ void* av_output(void * mbox)
             while (audio_fifo_space() < buf->audio_length)
                 thread_sleep(5);
 
-            audio_load_samples(uncached_ptr8(buf->src_audio), buf->audio_length);
+            audio_load_samples(buf->src_audio, buf->audio_length);
             avbuf_free(buf);
         }
     }

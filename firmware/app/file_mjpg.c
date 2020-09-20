@@ -68,7 +68,7 @@ int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped
 {
     FL_FILE * f = fl_fopen((const char*)play_file, "rb");
     if (!f)
-    	return 0;
+        return 0;
 
     uint32_t total_sectors  = (f->filelength + 511) / 512;
     // TODO: Currently assuming linear file storage for read speed - FIXME
@@ -121,7 +121,7 @@ int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped
 
         if (cb_stopped())
         {
-        	printf("User stopped playback...\n");
+            printf("User stopped playback...\n");
             break;
         }
     }

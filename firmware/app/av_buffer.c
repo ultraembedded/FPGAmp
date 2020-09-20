@@ -50,7 +50,8 @@ struct av_buffer* avbuf_alloc(void)
     csr_set_irq_enable();
 
     // Reset details
-    buf->length = 0;
+    buf->length       = 0;
+    buf->audio_length = 0;
 
     return buf;
 }

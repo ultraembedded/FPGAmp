@@ -27,8 +27,13 @@
 #include "ir_decode.h"
 #include "fb_dev.h"
 #include "ui.h"
-#include "file_mjpg.h"
 #include "av_output.h"
+
+#include "file_mjpg.h"
+#include "file_jpg.h"
+#ifdef INCLUDE_MP3_SUPPORT
+#include "file_mp3.h"
+#endif
 
 //-----------------------------------------------------------------
 // Defines:
@@ -189,6 +194,29 @@ void* play_thread(void * a)
             // Change mode to menu
             fbdev_set_framebuffer(FRAME_BUFFER0);
         }
+        else if (str_endswith(play_file, ".jpg"))
+        {
+            // Switch to video mode
+            fb_clear(FRAME_BUFFER1);
+            fb_clear(FRAME_BUFFER2);
+            fb_clear(FRAME_BUFFER3);
+            fbdev_set_framebuffer(FRAME_BUFFER1);
+
+            file_jpg_play(play_file, &mbox_fb, user_stop);
+
+            // Change mode to menu
+            fbdev_set_framebuffer(FRAME_BUFFER0);
+        }        
+#ifdef INCLUDE_MP3_SUPPORT
+        else if (str_endswith(play_file, ".mp3"))
+        {
+            file_mp3_play(play_file, &mbox_fb, user_stop);
+
+            // Wait for end of play
+            while (audio_fifo_level() != 0 || mbox_fb.count != 0)
+                thread_sleep(1);
+        }
+#endif
 
         // Wakeup menu thread
         mailbox_post(&mbox_comp, NULL);
