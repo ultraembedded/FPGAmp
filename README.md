@@ -18,6 +18,8 @@ This project is a FPGA based media player which is capable of playing [Motion JP
 
 ![ArtyA7](docs/arty.png)
 
+![IR Connection](docs/ir_conn.png)
+
 ## Cloning
 
 This repo contains submodules.  
