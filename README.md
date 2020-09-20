@@ -16,6 +16,8 @@ This project is a FPGA based media player which is capable of playing [Motion JP
 ## Supported Hardware
 * [Digilent Arty A7](https://reference.digilentinc.com/reference/programmable-logic/arty-a7/start) + [PMOD I2S2](https://reference.digilentinc.com/reference/pmod/pmodi2s2/start) + [PMOD MicroSD](https://reference.digilentinc.com/reference/pmod/pmodmicrosd/start) + [PMOD VGA](https://reference.digilentinc.com/reference/pmod/pmodvga/start) or PMOD2HDMI Breakout Cable + IR receiver
 
+![ArtyA7](docs/arty.png)
+
 ## Cloning
 
 This repo contains submodules.  
