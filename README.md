@@ -13,12 +13,14 @@ This project is a FPGA based media player which is capable of playing [Motion JP
 * JPEG stills display
 * IR remote control
 
+## Rationale
+*Why?* For the fun of it!  
+This project was an interesting test case for a number of my open-source digital IPs (RISC-V CPU, audio+video controllers), and also brings together various SW projects that I had written in years past (RTOS, FAT32 library).
+
 ## Supported Hardware
 * [Digilent Arty A7](https://reference.digilentinc.com/reference/programmable-logic/arty-a7/start) + [PMOD I2S2](https://reference.digilentinc.com/reference/pmod/pmodi2s2/start) + [PMOD MicroSD](https://reference.digilentinc.com/reference/pmod/pmodmicrosd/start) + [PMOD VGA](https://reference.digilentinc.com/reference/pmod/pmodvga/start) or PMOD2HDMI Breakout Cable + IR receiver
 
 ![ArtyA7](docs/arty.png)
-
-![IR Connection](docs/ir_conn.png)
 
 ## Cloning
 
@@ -66,3 +68,18 @@ The bootROM in the FPGA fabric will automatically load 'boot.bin' from the SD ca
 
 Debug messages will be comming out of the ArtyA7 USB-UART @ 1M baud (8N1).
 
+## IR Remote
+The project can be controlled via an IR remote (NEC protocol, currently).  
+The IR codes are device-specific but can be changed here;
+```
+// firmware/app/ir_decode.h
+#define IR_CMD_RIGHT    0x20df609f
+#define IR_CMD_LEFT     0x20dfe01f
+#define IR_CMD_DOWN     0x20df827d
+#define IR_CMD_UP       0x20df02fd
+#define IR_CMD_BACK     0x20df14eb
+```
+
+Handily, the UART outputs any received IR codes so it is relatively straight forward to tune the controls to a new remote.
+
+![IR Connection](docs/ir_conn.png)
