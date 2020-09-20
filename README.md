@@ -1,4 +1,4 @@
-# FPGA Media Player Project
+# FPGA Media Player
 
 This project is a FPGA based media player which is capable of playing [Motion JPEG](https://en.wikipedia.org/wiki/Motion_JPEG) encoded video over HDMI or VGA on commonly available FPGA boards.
 
