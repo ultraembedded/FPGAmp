@@ -240,12 +240,6 @@ set_property -dict { PACKAGE_PIN J18   IOSTANDARD TMDS_33 } [get_ports { tmds_ou
 set_property -dict { PACKAGE_PIN K15   IOSTANDARD TMDS_33 } [get_ports { tmds_out_p[3] }]; #IO_L24P_T3_RS1_15 Sch=jb_p[4]
 set_property -dict { PACKAGE_PIN J15   IOSTANDARD TMDS_33 } [get_ports { tmds_out_n[3] }]; #IO_L24N_T3_RS0_15 Sch=jb_n[4]
 
-# PMOD JC (I2S2)
-set_property -dict { PACKAGE_PIN U12   IOSTANDARD LVCMOS33 } [get_ports { i2s_mclk }]; #IO_L20P_T3_A08_D24_14 Sch=jc_p[1]
-set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { i2s_ws }]; #IO_L20N_T3_A07_D23_14 Sch=jc_n[1]
-set_property -dict { PACKAGE_PIN V10   IOSTANDARD LVCMOS33 } [get_ports { i2s_sck }]; #IO_L21P_T3_DQS_14 Sch=jc_p[2]
-set_property -dict { PACKAGE_PIN V11   IOSTANDARD LVCMOS33 } [get_ports { i2s_sdata }]; #IO_L21N_T3_DQS_A06_D22_14 Sch=jc_n[2]
-
 # PMOD Header JD (microSD)
 set_property -dict { PACKAGE_PIN D4    IOSTANDARD LVCMOS33 } [get_ports { sd_dat3_cs }];   #IO_L11N_T1_SRCC_35 Sch=jd[1]
 set_property -dict { PACKAGE_PIN D3    IOSTANDARD LVCMOS33 } [get_ports { sd_cmd_mosi }]; #IO_L12N_T1_MRCC_35 Sch=jd[2]
