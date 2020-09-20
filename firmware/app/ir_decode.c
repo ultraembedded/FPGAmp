@@ -125,8 +125,23 @@ void *ir_decode_thread(void *arg)
     while (1)
     {
         // Wait for IRQ
-        semaphore_pend(&m_sema);
-        mailbox_post(&mbox_ir_cmd, (void*)(uint32_t)m_ir_code);
+        if (semaphore_timed_pend(&m_sema, 100))
+            mailbox_post(&mbox_ir_cmd, (void*)(uint32_t)m_ir_code);
+        // Polled UART control
+        else
+        {
+            int ch = console_getchar();
+            if (ch == 'a')
+                mailbox_post(&mbox_ir_cmd, (void*)IR_CMD_UP);
+            else if (ch == 'z')
+                mailbox_post(&mbox_ir_cmd, (void*)IR_CMD_DOWN);
+            else if (ch == 'x')
+                mailbox_post(&mbox_ir_cmd, (void*)IR_CMD_LEFT);
+            else if (ch == 'c')
+                mailbox_post(&mbox_ir_cmd, (void*)IR_CMD_RIGHT);
+            else if (ch == 'v')
+                mailbox_post(&mbox_ir_cmd, (void*)IR_CMD_BACK);
+        }
     }
 }
 //-----------------------------------------------------------------
