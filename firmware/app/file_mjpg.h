@@ -6,6 +6,6 @@
 //-----------------------------------------------------------------
 // Prototypes:
 //-----------------------------------------------------------------
-int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped)(void));
+int file_mjpg_play(const char *play_file, struct mailbox *mbox, int fps, int (*cb_stopped)(void));
 
 #endif

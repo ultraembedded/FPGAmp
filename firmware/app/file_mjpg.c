@@ -64,7 +64,7 @@ static uint8_t *uncached_ptr8(uint8_t *p)
 //-----------------------------------------------------------------------------
 // file_mjpg_play: Play motion JPEG file
 //-----------------------------------------------------------------------------
-int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped)(void))
+int file_mjpg_play(const char *play_file, struct mailbox *mbox, int fps, int (*cb_stopped)(void))
 {
     FL_FILE * f = fl_fopen((const char*)play_file, "rb");
     if (!f)
@@ -75,6 +75,7 @@ int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped
     uint32_t current_sector = fl_get_start_sector(f);
     uint32_t last_sector   = current_sector + total_sectors;
 
+    int audio_samples = (AV_BUF_SRATE / fps);
     int frame_idx = 0;
     int subframe = 0;
     uint32_t *hdr_frame_sz = (uint32_t *)uncached_ptr8((uint8_t*)&hdr_b.frame_size[0]);
@@ -87,9 +88,15 @@ int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped
             if (subframe == 0)
                 mmc_async_io_read(current_sector++, (uint8_t*)&hdr_b, 1);
 
+            int audio_padded;
+            if (fps != 25 && (subframe & 1))
+                audio_padded = (((((audio_samples+1) * 4) + 511) / 512) * 512);
+            else
+                audio_padded = ((((audio_samples * 4) + 511) / 512) * 512);
+
             uint32_t size    = hdr_frame_sz[subframe];
             uint32_t size_pad= ((size + 511) / 512) * 512;
-            uint32_t sectors = ((size + 511) / 512) + (AV_AUD_SIZE / 512);
+            uint32_t sectors = ((size + 511) / 512) + (audio_padded / 512);
 
             // Invalid video frame length, end of video detected.
             if (size == 0)
@@ -105,7 +112,11 @@ int file_mjpg_play(const char *play_file, struct mailbox *mbox, int (*cb_stopped
             buf->src_video    = &buf->src_data[0];
             buf->src_audio    = (uint32_t*)&buf->src_data[size_pad];
             buf->length       = size;
-            buf->audio_length = (AV_BUF_SRATE / AV_BUF_FPS);
+
+            if (fps != 25 && (subframe & 1))
+                buf->audio_length = (AV_BUF_SRATE / fps) + 1;
+            else
+                buf->audio_length = (AV_BUF_SRATE / fps);
 
             if (++subframe == 128)
                 subframe = 0;

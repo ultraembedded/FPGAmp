@@ -5,7 +5,7 @@
 #include "list.h"
 
 #define AV_BUF_DEPTH    2
-#define AV_BUF_FPS      25
+#define AV_BUF_FPS      24
 #define AV_BUF_SRATE    44100
 
 // Round up to 512 sector size

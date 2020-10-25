@@ -185,7 +185,10 @@ void* play_thread(void * a)
             fb_clear(FRAME_BUFFER3);
             fbdev_set_framebuffer(FRAME_BUFFER1);
 
-            file_mjpg_play(play_file, &mbox_fb, user_stop);
+            if (str_endswith(play_file, ".mjpg2"))
+                file_mjpg_play(play_file, &mbox_fb, 24, user_stop);
+            else
+                file_mjpg_play(play_file, &mbox_fb, 25, user_stop);
 
             // Wait for end of play
             while (audio_fifo_level() != 0 || jpeg_hw_busy() || mbox_fb.count != 0)
