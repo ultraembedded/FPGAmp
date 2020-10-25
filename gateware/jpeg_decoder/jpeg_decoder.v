@@ -586,6 +586,8 @@ u_core
 
     ,.inport_valid_i(jpeg_valid_w)
     ,.inport_data_i(jpeg_data_w)
+    ,.inport_strb_i(4'hF)
+    ,.inport_last_i(1'b0)
     ,.inport_accept_o(core_accept_w)
 
     ,.outport_valid_o(pixel_valid_w)

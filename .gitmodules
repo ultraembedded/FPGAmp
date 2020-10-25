@@ -10,3 +10,6 @@
 [submodule "firmware/fs/fatfs"]
 	path = firmware/fs/fatfs
 	url = https://github.com/ultraembedded/fat_io_lib.git
+[submodule "gateware/jpeg_core"]
+	path = gateware/jpeg_core
+	url = https://github.com/ultraembedded/core_jpeg
