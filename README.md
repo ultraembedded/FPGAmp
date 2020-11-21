@@ -5,7 +5,7 @@ This project is a FPGA based media player which is capable of playing [Motion JP
 ![](docs/demo.png)
 
 ## Features
-* 800x600 25fps video (higher resolutions may also be possible)
+* 1280x720 [720p50 / 'standard HD'] 25fps video (also supports 24fps)
 * 44.1KHz stereo audio (I2S or SPDIF)
 * Hardware accelerated JPEG decoding
 * SD/MMC card interface (FAT16/32 support)
