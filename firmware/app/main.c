@@ -39,9 +39,9 @@
 // Defines:
 //-----------------------------------------------------------------
 #define FRAME_BUFFER0       (0x3000000)
-#define FRAME_BUFFER1       (0x3100000)
-#define FRAME_BUFFER2       (0x3200000)
-#define FRAME_BUFFER3       (0x3300000)
+#define FRAME_BUFFER1       (0x3200000)
+#define FRAME_BUFFER2       (0x3400000)
+#define FRAME_BUFFER3       (0x3600000)
 
 #define APP_STACK_SIZE      (1024)
 

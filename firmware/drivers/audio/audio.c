@@ -148,6 +148,11 @@ void audio_init(uint32_t base_addr, int irq_num, uint32_t clock_rate, tAudioTarg
                 m_audio[AUDIO_CLK_DIV/4]  =  17;
                 m_audio[AUDIO_CLK_FRAC/4] = (10000 << AUDIO_CLK_FRAC_DENOMINATOR_SHIFT) | 7154;
                 break;
+            case 60000000:
+                // 60000000÷(44100*32)/2 = 21.258503401360544
+                m_audio[AUDIO_CLK_DIV/4]  =  21;
+                m_audio[AUDIO_CLK_FRAC/4] = (10000 << AUDIO_CLK_FRAC_DENOMINATOR_SHIFT) | 2585;
+                break;
             default:
                 assert(!"unsupported");
                 break;

@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------
 // Defines:
 //-----------------------------------------------------------------
-#define FRAME_BUFFER1       (0x3100000)
-#define FRAME_BUFFER2       (0x3200000)
-#define FRAME_BUFFER3       (0x3300000)
+#define FRAME_BUFFER1       (0x3200000)
+#define FRAME_BUFFER2       (0x3400000)
+#define FRAME_BUFFER3       (0x3600000)
 
 //-----------------------------------------------------------------
 // uncached_ptr8: Convert to uncached alias
@@ -63,7 +63,10 @@ void* av_output(void * mbox)
             // 25fps minus some time...
             thread_sleep(35);
 
-            assert(!jpeg_hw_busy());
+            while (jpeg_hw_busy())
+                ;
+
+            //assert(!jpeg_hw_busy());
             avbuf_free(buf);
             frame_idx++;
 
